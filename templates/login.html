@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bucketlist - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+    <form class="well form-horizontal" id="login" method="POST" action="">
+      <fieldset>
+        <!-- Form Name -->
+        <legend>Please login</legend>
+
+        <!-- Username or email input-->
+        <div class="form-group">
+          <div class="col-md-4 col-md-offset-4 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+              <input name="username" id="username" placeholder="Username or E-Mail" class="form-control"  type="text" value="{{ request.form.username }}">
+            </div>
+          </div>
+        </div>
+        <!-- password input-->
+        <div class="form-group">
+          <div class="col-md-4 col-md-offset-4 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+              <input name="password" id="password" placeholder="Password" class="form-control"  type="password" value="{{ request.form.password }}">
+            </div>
+          </div>
+        </div>
+        {% if error %}
+          <div class="error col-md-6 col-md-offset-4"><strong>{{ error }}</strong></div>
+        {% endif %}
+        <!-- Login Button -->
+        <div class="form-group">
+          <label class="col-md-4 control-label"></label>
+          <div class="col-md-4">
+            <button type="submit" id="login" class="btn btn-default" value="Login">Login <span class="glyphicon glyphicon-log-in"></span></button>
+          </div>
+        </div>
+
+        <!-- Already a member Link -->
+        <div class="row">
+          <div class="col-md-6 col-md-offset-4">Not registered? <a href="{{url_for('register')}}">Register</a></div>
+        </div>
+       {% for message in get_flashed_messages() %}
+            {{ message }}
+        {% endfor %}
+
+      </fieldset>
+    </form>
+    </div>
+  </div><!-- /.container -->
+</body>
+</html>
