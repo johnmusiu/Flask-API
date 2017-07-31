@@ -23,7 +23,6 @@ class User(db.Model):
 
 	def verify_password(self, password, password_hash):
 		'''verifies that hash for password entered matches stored hash, returns True or False'''
-		print("******************************",bcrypt.hashpw(password, password_hash) == password_hash)
 		if bcrypt.hashpw(password, password_hash) == password_hash:
 			return True
 		else:
@@ -98,7 +97,6 @@ class Activities(db.Model):
 	bucketlist = db.relationship(Bucketlist)
 
 	def __init__(self, title, description, bucketlist_id, place="", people=""):
-		self.id = id
 		self.title = title
 		self.description = description
 		self.place = place
@@ -115,8 +113,10 @@ class Activities(db.Model):
 		db.session.delete(self)
 		db.session.commit()
 
-	def update(self, bl_id, title, desc):
+	def update(self, title, desc):
 		''' updates an activity '''
+		self.title = title
+		self.description = desc
 		db.session.add(self)
 		db.session.commit()
 	

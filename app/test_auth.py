@@ -1,14 +1,14 @@
 """Unit testing classes"""
-
-import unittest
-#import logging
 from .api import create_app, db
+import unittest
+
+
 #test_func_edgecase
 class TestAuthentication(unittest.TestCase):
     """this class contains tests for all user posible actions"""
     def setUP(self):
         """  """
-        self.app = create_app('TestingConfig')
+        self.app = create_app('testing')
         # app.config.from_object('config.TestingConfig')
         test = self.app.test_client(self)
 

@@ -1,15 +1,16 @@
 """Unit testing classes"""
-import json
-import unittest
 from .api import create_app, db
+from flask import json
+import unittest
+
 
 #test_func_edgecase
 class TestActivities(unittest.TestCase):
     """this class contains tests for all user posible actions"""
-    def setUP(self):
+    def setUp(self):
         """ setup the testing parameters(configuration)
     	 setup values to be reused in other tests """
-        self.app = create_app('development')
+        self.app = create_app('testing')
         self.client = self.app.test_client
         self.item = {'title': 'Take snap with simba'}
 

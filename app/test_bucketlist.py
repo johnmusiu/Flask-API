@@ -1,15 +1,14 @@
 """Unit testing classes"""
+from .api import create_app, db
 import unittest
 import json
-from .api import create_app, db
-#0701874389
-#test_func_edgecase
+
 class TestBucketlist(unittest.TestCase):
     """this class contains tests for all user posible actions"""
-    def setUP(self):
+    def setUp(self):
         """ setup the testing parameters(configuration)
     	 setup values to be reused in other tests """
-        self.app = create_app('development')
+        self.app = create_app('testing')
         self.client = self.app.test_client
         self.bucketlist = {'title': 'Go to the zoo'}
 
@@ -25,7 +24,7 @@ class TestBucketlist(unittest.TestCase):
         self.assertIn('Go to the zoo', str(result.data))
 
     def test_view_bl_success(self):
-        res = self.client().put('/bucketlists/1', data = {'title': 'For crying out loud'})
+        res = self.client().post('/bucketlists/1', data = {'title': 'For crying out loud'})
         self.assertEqual(res.status_code, 201)
         result = self.client().get('/bucketlists/')
         self.assertEqual(result.status, 200)
@@ -66,21 +65,6 @@ class TestBucketlist(unittest.TestCase):
             #delete all tables (drop)
             db.session.remove()
             db.drop_all
-    # def test_delete_bl_empty_id(self):
-    #     ''' tests delete if empty bl id passed '''
-    #     pass
-
-    # def test_edit_bl_success(self):
-    #     ''' test edit bl success '''
-    #     pass
-
-    # def test_edit_bl_empty_input(self):
-    #     ''' test edit user with empty input '''
-    #     pass
-
-    # def test_edit_bl_existing_title(self):
-    #     ''' test if user tries to add a title that already exists '''
-
     
 if __name__ == '__main__':
     unittest.main()
